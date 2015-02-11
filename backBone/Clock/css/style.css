@@ -1,0 +1,10 @@
+.wrapper{
+    padding-top:5em;
+}
+.selected-city{
+    cursor: pointer;
+}
+
+.selected-city:hover{
+    background: rgb(227, 240, 227);
+}
