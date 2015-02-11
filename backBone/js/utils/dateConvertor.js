@@ -19,7 +19,7 @@ define([], function () {
         var time = null,
             getSec = null;
 
-        time = _adduction(offset,ms)
+        time = _adduction(offset,ms);
         getSec=time.getSeconds();
 
      return (getSec< 10) ? '0'+getSec:getSec;
@@ -29,7 +29,7 @@ define([], function () {
         var time = null,
             getMin = null;
 
-        time = _adduction(offset,ms)
+        time = _adduction(offset,ms);
         getMin=time.getMinutes();
 
     return (getMin< 10) ? '0'+getMin:getMin;
@@ -39,7 +39,7 @@ define([], function () {
         var time = null,
             getHours = null;
 
-        time = _adduction(offset,ms)
+        time = _adduction(offset,ms);
         getHours=time.getHours();
 
         return (getHours< 10) ? '0'+getHours:getHours;

@@ -1,11 +1,9 @@
 define(['Vendor',
        'observer',
-       'components/services/Forecast',
        'text!./dropListTemplate.html',
        './itemView',
        './dropListCollection'], function (Vendor,
                                           Observer,
-                                          Forecast,
                                           Template,
                                           ItemView,
                                           Collection) {
@@ -23,14 +21,15 @@ define(['Vendor',
         },
 
         render: function () {
-           this.$el.empty()
+
+           this.$el.empty();
            this.collection.each(function(model){
 
                this.itemView=new ItemView({model:model});
 
-               $('.auto-cites').append(this.itemView.render())
+               this.$el.append(this.itemView.render())
 
-           });
+           },this);
         }
     });
 

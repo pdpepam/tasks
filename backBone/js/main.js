@@ -120,6 +120,6 @@ define('main',
         }
 
         function dropCity(city) {
-            citesView.collection.remove(city.model)
+            citesView.collection.remove(city.model.cid);
         }
 });
