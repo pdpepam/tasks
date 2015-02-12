@@ -25,8 +25,7 @@ define(['Vendor',
         },
 
         render: function () {
-            //this.json = this.model.toJSON();
-            console.log(this.model)
+
             this.template = _.template(Template);
             this.view = this.template(this.model.toJSON());
             this.$el.html(this.view);

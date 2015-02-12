@@ -17,10 +17,11 @@ define(['Vendor',
         tagName: 'tr',
 
         events: {
-            'click .delete-row': 'remove'
+            'click .delete-row': 'destroy'
         },
 
         initialize: function () {
+            this.listenTo(this.model, 'destroy', this.remove)
             this.render();
         },
 
@@ -42,10 +43,14 @@ define(['Vendor',
             return this.$el;
         },
 
-        remove: function () {
-            Observer.trigger('remove', this);
-        }
+        destroy: function () {
+            this.model.destroy();
+            //Observer.trigger('remove', this);
+        },
 
+        remove: function(){
+            this.$el.remove();
+        }
     });
 
     return cityView;

@@ -74,9 +74,7 @@ define('main',
          * Select city from dropList*/
         Observer.on('selectGoogle', selectGoogleCity);
 
-        /**
-         * Drop city from citys collection*/
-        Observer.on('remove', dropCity);
+
 
         function getAutocomplete(data) {
 
@@ -119,7 +117,4 @@ define('main',
 
         }
 
-        function dropCity(city) {
-            citesView.collection.remove(city.model.cid);
-        }
 });
