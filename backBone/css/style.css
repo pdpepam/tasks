@@ -1,3 +1,4 @@
+
 .wrapper{
     padding-top:5em;
 }
@@ -7,4 +8,10 @@
 
 .selected-city:hover{
     background: rgb(227, 240, 227);
+}
+
+.clock{
+    align:center;
+    font-family: Digital;
+    font-size: 2em;
 }

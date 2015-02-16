@@ -1,11 +1,11 @@
 define('vendor/core',
     ['jquery',
      'lodash',
-     'Backbone'],function(
+     'Backbone',
+   ],function(
                           $,
                           _,
-                          Backbone,
-                          Router){
+                          Backbone){
 
  return{
    '$':$,

@@ -1,13 +1,17 @@
 define(['Vendor',
-        'utils/dateConvertor',
+        'Observer',
+        '../../utils/dateConvertor',
         'components/services/Forecast',
-        './cityView',
+        './city/cityView',
+        './clock/clockView',
         './citysCollection'
 
 ], function (Vendor,
+             Observer,
              DateConvertor,
              Forecast,
-             ItemView,
+             CityView,
+             ClockView,
              Collection ) {
 
 var _ = Vendor._,
@@ -18,7 +22,7 @@ var _ = Vendor._,
             var self = this;
             this.collection=new Collection();
             this.listenTo(this.collection,'add',this.render);
-            setInterval(function(){self.render()},1000);
+
             this.render();
         },
 
@@ -26,10 +30,23 @@ var _ = Vendor._,
             var self = this;
             this.$el.empty();
             this.collection.each(function(model){
-                var itemView = null;
+                var cityView = null,
+                    clockView = null,
+                    clockHolder = null,
 
-                itemView = new ItemView({model: model});
-                self.$el.append(itemView.render());
+
+                cityView = new CityView({model: model});
+
+                setTimeout(function(){
+                    var holder = $(cityView.$el).children('.clock') ;
+                    clockView = new ClockView({el:holder, model:model});
+
+                },1)
+
+
+                self.$el.append(cityView.render());
+
+
             });
         }
     });

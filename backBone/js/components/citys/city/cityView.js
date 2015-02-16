@@ -1,10 +1,12 @@
 define(['Vendor',
-        'observer',
+        '../../../observer',
+        'components/services/LocalStorage',
         'utils/dateConvertor',
         './cityModel',
         'text!./cityTemplate.html'
 ], function (Vendor,
              Observer,
+             LocalStorage,
              DateConvertor,
              ItemModel,
              Template) {
@@ -14,6 +16,9 @@ define(['Vendor',
         cityView;
 
     cityView = Backbone.View.extend({
+
+
+
         tagName: 'tr',
 
         events: {
@@ -45,7 +50,6 @@ define(['Vendor',
 
         destroy: function () {
             this.model.destroy();
-            //Observer.trigger('remove', this);
         },
 
         remove: function(){

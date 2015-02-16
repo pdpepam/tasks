@@ -8,6 +8,8 @@ define(['Vendor'],function(Vendor){
 
     CityModel = Backbone.Model.extend({
 
+        url:'#some',
+
         defaults:{
             city:'Kharkov',
             country:'Ukraine',

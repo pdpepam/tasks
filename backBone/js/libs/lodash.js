@@ -306,9 +306,9 @@
      * The base implementation of `_.indexOf` without support for binary searches.
      *
      * @private
-     * @param {Array} array The array to citys.
-     * @param {*} value The value to citys for.
-     * @param {number} [fromIndex=0] The index to citys from.
+     * @param {Array} array The array to city.
+     * @param {*} value The value to city for.
+     * @param {number} [fromIndex=0] The index to city from.
      * @returns {number} Returns the index of the matched value, else `-1`.
      */
     function baseIndexOf(array, value, fromIndex) {
@@ -488,8 +488,8 @@
      * If `fromRight` is provided elements of `array` are iterated from right to left.
      *
      * @private
-     * @param {Array} array The array to citys.
-     * @param {number} [fromIndex] The index to citys from.
+     * @param {Array} array The array to city.
+     * @param {number} [fromIndex] The index to city from.
      * @param {boolean} [fromRight] Specify iterating from right to left.
      * @returns {number} Returns the index of the matched `NaN`, else `-1`.
      */
@@ -1220,8 +1220,8 @@
          * `_.indexOf` by returning `0` if the value is found, else `-1`.
          *
          * @private
-         * @param {Object} cache The cache to citys.
-         * @param {*} value The value to citys for.
+         * @param {Object} cache The cache to city.
+         * @param {*} value The value to city for.
          * @returns {number} Returns `0` if `value` is found, else `-1`.
          */
         function cacheIndexOf(cache, value) {
@@ -1891,7 +1891,7 @@
          * over `collection` using the provided `eachFunc`.
          *
          * @private
-         * @param {Array|Object|string} collection The collection to citys.
+         * @param {Array|Object|string} collection The collection to city.
          * @param {Function} predicate The function invoked per iteration.
          * @param {Function} eachFunc The function to iterate over `collection`.
          * @param {boolean} [retKey] Specify returning the key of the found element
@@ -2627,7 +2627,7 @@
         }
 
         /**
-         * Performs a binary citys of `array` to determine the index at which `value`
+         * Performs a binary city of `array` to determine the index at which `value`
          * should be inserted into `array` in order to maintain its sort order.
          *
          * @private
@@ -4175,7 +4175,7 @@
          * @static
          * @memberOf _
          * @category Array
-         * @param {Array} array The array to citys.
+         * @param {Array} array The array to city.
          * @param {Function|Object|string} [predicate=_.identity] The function invoked
          *  per iteration. If a property name or object is provided it is used to
          *  create a "_.property" or "_.matches" style callback respectively.
@@ -4227,7 +4227,7 @@
          * @static
          * @memberOf _
          * @category Array
-         * @param {Array} array The array to citys.
+         * @param {Array} array The array to city.
          * @param {Function|Object|string} [predicate=_.identity] The function invoked
          *  per iteration. If a property name or object is provided it is used to
          *  create a "_.property" or "_.matches" style callback respectively.
@@ -4334,7 +4334,7 @@
          * Gets the index at which the first occurrence of `value` is found in `array`
          * using `SameValueZero` for equality comparisons. If `fromIndex` is negative,
          * it is used as the offset from the end of `array`. If `array` is sorted
-         * providing `true` for `fromIndex` performs a faster binary citys.
+         * providing `true` for `fromIndex` performs a faster binary city.
          *
          * **Note:** `SameValueZero` comparisons are like strict equality comparisons,
          * e.g. `===`, except that `NaN` matches `NaN`. See the
@@ -4344,10 +4344,10 @@
          * @static
          * @memberOf _
          * @category Array
-         * @param {Array} array The array to citys.
-         * @param {*} value The value to citys for.
-         * @param {boolean|number} [fromIndex=0] The index to citys from or `true`
-         *  to perform a binary citys on a sorted array.
+         * @param {Array} array The array to city.
+         * @param {*} value The value to city for.
+         * @param {boolean|number} [fromIndex=0] The index to city from or `true`
+         *  to perform a binary city on a sorted array.
          * @returns {number} Returns the index of the matched value, else `-1`.
          * @example
          *
@@ -4358,7 +4358,7 @@
          * _.indexOf([1, 2, 3, 1, 2, 3], 2, 3);
          * // => 4
          *
-         * // performing a binary citys
+         * // performing a binary city
          * _.indexOf([4, 4, 5, 5, 6, 6], 5, true);
          * // => 2
          */
@@ -4481,10 +4481,10 @@
          * @static
          * @memberOf _
          * @category Array
-         * @param {Array} array The array to citys.
-         * @param {*} value The value to citys for.
-         * @param {boolean|number} [fromIndex=array.length-1] The index to citys from
-         *  or `true` to perform a binary citys on a sorted array.
+         * @param {Array} array The array to city.
+         * @param {*} value The value to city for.
+         * @param {boolean|number} [fromIndex=array.length-1] The index to city from
+         *  or `true` to perform a binary city on a sorted array.
          * @returns {number} Returns the index of the matched value, else `-1`.
          * @example
          *
@@ -4495,7 +4495,7 @@
          * _.lastIndexOf([1, 2, 3, 1, 2, 3], 2, 3);
          * // => 1
          *
-         * // performing a binary citys
+         * // performing a binary city
          * _.lastIndexOf([4, 4, 5, 5, 6, 6], 5, true);
          * // => 3
          */
@@ -4691,7 +4691,7 @@
         }
 
         /**
-         * Uses a binary citys to determine the lowest index at which `value` should
+         * Uses a binary city to determine the lowest index at which `value` should
          * be inserted into `array` in order to maintain its sort order. If an iteratee
          * function is provided it is invoked for `value` and each element of `array`
          * to compute their sort ranking. The iteratee is bound to `thisArg` and
@@ -4970,7 +4970,7 @@
         /**
          * Creates a duplicate-value-free version of an array using `SameValueZero`
          * for equality comparisons. Providing `true` for `isSorted` performs a faster
-         * citys algorithm for sorted arrays. If an iteratee function is provided it
+         * city algorithm for sorted arrays. If an iteratee function is provided it
          * is invoked for each value in the array to generate the criterion by which
          * uniqueness is computed. The `iteratee` is bound to `thisArg` and invoked
          * with three arguments; (value, index, array).
@@ -5398,9 +5398,9 @@
          * @memberOf _
          * @alias contains, include
          * @category Collection
-         * @param {Array|Object|string} collection The collection to citys.
-         * @param {*} target The value to citys for.
-         * @param {number} [fromIndex=0] The index to citys from.
+         * @param {Array|Object|string} collection The collection to city.
+         * @param {*} target The value to city for.
+         * @param {number} [fromIndex=0] The index to city from.
          * @returns {boolean} Returns `true` if a matching element is found, else `false`.
          * @example
          *
@@ -5584,7 +5584,7 @@
          * @memberOf _
          * @alias detect
          * @category Collection
-         * @param {Array|Object|string} collection The collection to citys.
+         * @param {Array|Object|string} collection The collection to city.
          * @param {Function|Object|string} [predicate=_.identity] The function invoked
          *  per iteration. If a property name or object is provided it is used to
          *  create a "_.property" or "_.matches" style callback respectively.
@@ -5625,7 +5625,7 @@
          * @static
          * @memberOf _
          * @category Collection
-         * @param {Array|Object|string} collection The collection to citys.
+         * @param {Array|Object|string} collection The collection to city.
          * @param {Function|Object|string} [predicate=_.identity] The function invoked
          *  per iteration. If a property name or object is provided it is used to
          *  create a "_.property" or "_.matches" style callback respectively.
@@ -5649,7 +5649,7 @@
          * @static
          * @memberOf _
          * @category Collection
-         * @param {Array|Object|string} collection The collection to citys.
+         * @param {Array|Object|string} collection The collection to city.
          * @param {Object} source The object of property values to match.
          * @returns {*} Returns the matched element, else `undefined`.
          * @example
@@ -6394,7 +6394,7 @@
          * @static
          * @memberOf _
          * @category Collection
-         * @param {Array|Object|string} collection The collection to citys.
+         * @param {Array|Object|string} collection The collection to city.
          * @param {Object} source The object of property values to match.
          * @returns {Array} Returns the new filtered array.
          * @example
@@ -8258,7 +8258,7 @@
          * @static
          * @memberOf _
          * @category Object
-         * @param {Object} object The object to citys.
+         * @param {Object} object The object to city.
          * @param {Function|Object|string} [predicate=_.identity] The function invoked
          *  per iteration. If a property name or object is provided it is used to
          *  create a "_.property" or "_.matches" style callback respectively.
@@ -8302,7 +8302,7 @@
          * @static
          * @memberOf _
          * @category Object
-         * @param {Object} object The object to citys.
+         * @param {Object} object The object to city.
          * @param {Function|Object|string} [predicate=_.identity] The function invoked
          *  per iteration. If a property name or object is provided it is used to
          *  create a "_.property" or "_.matches" style callback respectively.
@@ -9106,9 +9106,9 @@
          * @static
          * @memberOf _
          * @category String
-         * @param {string} [string=''] The string to citys.
-         * @param {string} [target] The string to citys for.
-         * @param {number} [position=string.length] The position to citys from.
+         * @param {string} [string=''] The string to city.
+         * @param {string} [target] The string to city for.
+         * @param {number} [position=string.length] The position to city from.
          * @returns {boolean} Returns `true` if `string` ends with `target`, else `false`.
          * @example
          *
@@ -9426,9 +9426,9 @@
          * @static
          * @memberOf _
          * @category String
-         * @param {string} [string=''] The string to citys.
-         * @param {string} [target] The string to citys for.
-         * @param {number} [position=0] The position to citys from.
+         * @param {string} [string=''] The string to city.
+         * @param {string} [target] The string to city for.
+         * @param {number} [position=0] The position to city from.
          * @returns {boolean} Returns `true` if `string` starts with `target`, else `false`.
          * @example
          *

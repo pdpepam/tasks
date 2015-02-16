@@ -39,10 +39,10 @@ define(['Vendor'], function (Vendor) {
 
                 if (status == 'OK') {
 
-                    //Get longitude and latitude of citys
+                    //Get longitude and latitude of city
                     self.cord = place.geometry.location;
 
-                    /*Using  longitude and latitude of citys for getting
+                    /*Using  longitude and latitude of city for getting
                      wheather information*/
                     self._getForecast(self);
                 }else {
@@ -54,7 +54,7 @@ define(['Vendor'], function (Vendor) {
         //get info from google Forecast
         _getForecast: function (self) {
 
-            //get citys url
+            //get city url
             var url = 'https://api.forecast.io/forecast/91cb318ae9c4109ad10717f52100759f/' + this.cord.k + ',' + this.cord.D + '?callback=?';
 
             $.getJSON(url, function (data, status) {

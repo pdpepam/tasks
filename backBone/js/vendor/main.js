@@ -1,13 +1,12 @@
 define('Vendor', [
-    'vendor/core',
-    'observer'
-], function (core, router) {
+    'vendor/core'
+], function (core) {
 
     'use strict';
 
     return {
-        '$': core.$,
-        '_': core._,
-        'Backbone': core.Backbone
+        '$'        : core.$,
+        '_'        : core._,
+        'Backbone' : core.Backbone
     };
 });

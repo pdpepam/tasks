@@ -1237,7 +1237,7 @@
 
         // Manually bind a single named route to a callback. For example:
         //
-        //     this.route('citys/:query/p:num', 'citys', function(query, num) {
+        //     this.route('city/:query/p:num', 'city', function(query, num) {
         //       ...
         //     });
         //
@@ -1301,7 +1301,7 @@
         _extractParameters: function(route, fragment) {
             var params = route.exec(fragment).slice(1);
             return _.map(params, function(param, i) {
-                // Don't decode the citys params.
+                // Don't decode the city params.
                 if (i === params.length - 1) return param || null;
                 return param ? decodeURIComponent(param) : null;
             });

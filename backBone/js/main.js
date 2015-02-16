@@ -3,11 +3,13 @@ require.config({
     baseUrl: 'js',
 
     paths: {
-        'jquery': 'libs/jquery-2.1.3',
-        'lodash': 'libs/lodash',
-        'Backbone': 'libs/backbone',
-        'text': 'libs/text',
-        'observer': 'observer'
+        'jquery'   : 'libs/jquery-2.1.3',
+        'lodash'   : 'libs/lodash',
+        'Backbone' : 'libs/backbone',
+        'text'     : 'libs/text',
+        'observer' : 'observer',
+        'routes'   :'routes'
+
     },
 
     shim: {
@@ -39,15 +41,17 @@ require.config({
 
 define('main',
     ['Vendor',
-        'observer',
-        'components/services/Forecast',
-        'components/search/searchView',
-        'components/dropList/dropListView',
-        'components/citys/citysView'
+     'observer',
+     'routes',
+    'components/services/Forecast',
+    'components/search/searchView',
+    'components/dropList/dropListView',
+    'components/citys/citysView'
     ],
 
     function (Vendor,
               Observer,
+              Routes,
               Forecast,
               SearchView,
               DropListView,
@@ -55,15 +59,24 @@ define('main',
 
         'use strict';
 
-        var Holders = {
+        var Holders = null,
+            searchView = null,
+            dropListView = null,
+            citesView = null
+            History;
+
+        History = Backbone.history.start();
+
+        Holders = {
             'searchHolder': '.google-search',
             'dropListHolder': '.auto-cites',
             'citysHolder': '.finded-cites tbody'
         };
 
-        new SearchView({el: Holders.searchHolder});
-        var citesView = new CitesView({el: Holders.citysHolder});
-        var dropListView = new DropListView({el: Holders.dropListHolder});
+        searchView = new SearchView({el: Holders.searchHolder});
+        dropListView = new DropListView({el: Holders.dropListHolder});
+        citesView = new CitesView({el: Holders.citysHolder});
+
 
         /**
          * Search city using Google Autocomplete
@@ -74,6 +87,9 @@ define('main',
          * Select city from dropList*/
         Observer.on('selectGoogle', selectGoogleCity);
 
+        /**
+         * Save city to LacalStorage*/
+        Observer.on('saveLocalSt',saveLocalStorage)
 
 
         function getAutocomplete(data) {
@@ -117,4 +133,11 @@ define('main',
 
         }
 
+        function saveLocalStorage(data){
+
+            if(Modernizr.localstorage){
+                LocalStorage
+
+            }
+        }
 });

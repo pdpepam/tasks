@@ -1,0 +1,7 @@
+@font-face {
+    font-family: Digital; /* Имя шрифта */
+    src: url(../fonts/digital-7-webfont.eot); /* Путь к файлу со шрифтом */
+    src: url(../fonts/digital-7-webfont.svg); /* Путь к файлу со шрифтом */
+    src: url(../fonts/digital-7-webfont.ttf); /* Путь к файлу со шрифтом */
+    src: url(../fonts/digital-7-webfont.woff); /* Путь к файлу со шрифтом */
+}
