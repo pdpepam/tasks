@@ -21,11 +21,9 @@ define(['Vendor',
 
         initialize: function () {
             this.render();
-
         },
 
         render: function () {
-
             this.template = _.template(Template);
             this.view = this.template(this.model.toJSON());
             this.$el.html(this.view);
@@ -34,6 +32,7 @@ define(['Vendor',
 
         remove: function () {
             Observer.trigger("selectGoogle", this.model);
+            var json=this.model.toJSON();
             this.$el.remove();
         }
     });

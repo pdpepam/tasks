@@ -17,8 +17,6 @@ define(['Vendor',
 
     cityView = Backbone.View.extend({
 
-
-
         tagName: 'tr',
 
         events: {
@@ -26,26 +24,31 @@ define(['Vendor',
         },
 
         initialize: function () {
-            this.listenTo(this.model, 'destroy', this.remove)
+            this.listenTo(this.model, 'destroy', this.remove);
             this.render();
         },
 
         render: function () {
+            this.newModel=this.modelCalculation()
+            this.template = _.template(Template);
+            this.view = this.template(this.newModel.toJSON());
+            this.$el.html(this.view);
+            return this.$el;
+        },
+
+        modelCalculation: function(){
             var  json = null,
-                 newModel;
+                newModel;
 
             json = this.model.toJSON();
 
             newModel = new ItemModel({ 'city'     : json.city,
-                                       'country'  : json.country,
-                                       'hours'    : DateConvertor.getHours(json.offset),
-                                       'minutes'  : DateConvertor.getMinutes(json.offset),
-                                       'seconds'  : DateConvertor.getSeconds(json.offset)});
+                'country'  : json.country,
+                'hours'    : DateConvertor.getHours(json.offset),
+                'minutes'  : DateConvertor.getMinutes(json.offset),
+                'seconds'  : DateConvertor.getSeconds(json.offset)});
 
-            this.template = _.template(Template);
-            this.view = this.template(newModel.toJSON());
-            this.$el.html(this.view);
-            return this.$el;
+        return newModel;
         },
 
         destroy: function () {

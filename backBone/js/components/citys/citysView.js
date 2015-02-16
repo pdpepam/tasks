@@ -1,5 +1,6 @@
 define(['Vendor',
         'Observer',
+        'components/services/LocalStorage',
         '../../utils/dateConvertor',
         'components/services/Forecast',
         './city/cityView',
@@ -8,6 +9,7 @@ define(['Vendor',
 
 ], function (Vendor,
              Observer,
+             LocalStorage,
              DateConvertor,
              Forecast,
              CityView,
@@ -22,7 +24,7 @@ var _ = Vendor._,
             var self = this;
             this.collection=new Collection();
             this.listenTo(this.collection,'add',this.render);
-
+            this.localStorageRender();
             this.render();
         },
 
@@ -40,15 +42,43 @@ var _ = Vendor._,
                 setTimeout(function(){
                     var holder = $(cityView.$el).children('.clock') ;
                     clockView = new ClockView({el:holder, model:model});
-
-                },1)
-
+                },1);
 
                 self.$el.append(cityView.render());
 
 
             });
+        },
+
+        localStorageRender:function(){
+
+            console.log(LocalStorage)
+            if(Modernizr.localstorage){
+
+                LocalStorage.each(function(model){
+
+                })
+                //this.collection.each(function(model){
+                //    var cityView = null,
+                //        clockView = null,
+                //        clockHolder = null,
+                //
+                //
+                //        cityView = new CityView({model: model});
+                //
+                //    setTimeout(function(){
+                //        var holder = $(cityView.$el).children('.clock') ;
+                //        clockView = new ClockView({el:holder, model:model});
+                //    },1);
+                //
+                //    self.$el.append(cityView.render());
+                //
+
+                //});
+
+            }
         }
+
     });
 
 return cityView;

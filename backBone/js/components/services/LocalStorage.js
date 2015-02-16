@@ -7,9 +7,26 @@ define(['Vendor'],function(Vendor){
         LocalStorage;
 
     LocalStorage = Backbone.Collection.extend({
-        //'locaslStorage': new Backbone.LocalStorage()
-    })
-    return LocalStorage;
+
+
+
+        initialize:function(){
+            localStorage.setItem('aaaaa','123')
+        },
+
+        add:function(name,value){
+            if(Modernizr.localstorage){
+                localStorage.setItem(name,JSON.stringify(value));
+                return localStorage
+            }
+        },
+
+        clear:function(){
+            localStorage.clear()
+        }
+    });
+
+    return new LocalStorage();
 
 });
 
