@@ -1,6 +1,6 @@
 define(['Vendor',
         'Observer',
-        'components/services/LocalStorage',
+        '../services/LocalStorage/LocalStorage',
         '../../utils/dateConvertor',
         'components/services/Forecast',
         './city/cityView',
@@ -18,6 +18,7 @@ define(['Vendor',
 
 var _ = Vendor._,
     $ = Vendor.$,
+    Backbone = Vendor.Backbone,
     cityView = Backbone.View.extend({
 
         initialize: function () {
@@ -34,7 +35,7 @@ var _ = Vendor._,
             this.collection.each(function(model){
                 var cityView = null,
                     clockView = null,
-                    clockHolder = null,
+                    clockHolder = null;
 
 
                 cityView = new CityView({model: model});
@@ -45,19 +46,28 @@ var _ = Vendor._,
                 },1);
 
                 self.$el.append(cityView.render());
-
-
             });
         },
 
         localStorageRender:function(){
+            var self=this;
+            var localStorage=LocalStorage.getItems();
+            for(var item in localStorage){
+                var json = localStorage[item];
+                var some = json;
+                console.log(JSON.parse(some));
+                var BacbondeModel=Backbone.Model.extend({})
+                var model =new BacbondeModel({
+                    'city':JSON.parse(some).city,
+                    'country':JSON.parse(some).country,
+                    'offset':JSON.parse(some).offset
+                });
+                console.log(model)
+                self.collection.add(model)
+            }
+          /*  if(Modernizr.localstorage){
+                console.log(LocalStorage.getItems())
 
-            console.log(LocalStorage)
-            if(Modernizr.localstorage){
-
-                LocalStorage.each(function(model){
-
-                })
                 //this.collection.each(function(model){
                 //    var cityView = null,
                 //        clockView = null,
@@ -76,7 +86,7 @@ var _ = Vendor._,
 
                 //});
 
-            }
+            }*/
         }
 
     });

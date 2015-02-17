@@ -1,6 +1,6 @@
 define(['Vendor',
-        '../../../observer',
-        'components/services/LocalStorage',
+        'observer',
+        'components/services/LocalStorage/LocalStorage',
         'utils/dateConvertor',
         './cityModel',
         'text!./cityTemplate.html'
@@ -25,11 +25,12 @@ define(['Vendor',
 
         initialize: function () {
             this.listenTo(this.model, 'destroy', this.remove);
+            this.saveLocal();
             this.render();
         },
 
         render: function () {
-            this.newModel=this.modelCalculation()
+            this.newModel=this.modelCalculation();
             this.template = _.template(Template);
             this.view = this.template(this.newModel.toJSON());
             this.$el.html(this.view);
@@ -43,13 +44,17 @@ define(['Vendor',
             json = this.model.toJSON();
 
             newModel = new ItemModel({ 'city'     : json.city,
-                'country'  : json.country,
-                'hours'    : DateConvertor.getHours(json.offset),
-                'minutes'  : DateConvertor.getMinutes(json.offset),
-                'seconds'  : DateConvertor.getSeconds(json.offset)});
+                                        'country'  : json.country}
+                //'hours'    : DateConvertor.getHours(json.offset),
+                //'minutes'  : DateConvertor.getMinutes(json.offset),
+                //'seconds'  : DateConvertor.getSeconds(json.offset)}
+            );
+
 
         return newModel;
         },
+
+
 
         destroy: function () {
             this.model.destroy();
@@ -57,6 +62,13 @@ define(['Vendor',
 
         remove: function(){
             this.$el.remove();
+        },
+
+
+        saveLocal:function(){
+            var json =this.model.toJSON();
+            LocalStorage.addItem(json.city,json)
+            //console.log(localStorage);
         }
     });
 
