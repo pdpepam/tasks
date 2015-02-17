@@ -44,6 +44,10 @@ define(['Vendor',
             this.model.set({
                 'hours':val
             },{validate:true})
+
+            /**
+            * Save to LocaslStorage*/
+            this.saveLocalHours()
         },
 
         saveMinutes:function(){
@@ -51,8 +55,27 @@ define(['Vendor',
             this.model.set({
                 'hours':val
             },{validate:true})
-        }}
-    );
+           /**
+            * Save local minutes*/
+           this.saveLocalMinutes()
+        },
+
+        defineLocalKey: function(){
+            return this.$('.hours').parent().siblings('.city').html()
+        },
+        saveLocalMinutes:function(){
+            var key = this.defineLocalKey()
+            console.log(key)
+        },
+
+         saveLocalHours:function(){
+             var key = this.defineLocalKey()
+             console.log(key)
+         }
+
+        }
+
+);
 
     return clockView;
 });
