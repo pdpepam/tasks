@@ -32,6 +32,14 @@ define(['Vendor'],function(Vendor) {
             }
         };
 
+        this.getItem = function(key){
+           return localStorage.getItem(key)
+        };
+
+        this.setItem = function(key,val){
+            localStorage.setItem(key,val)
+        }
+
         this.getItems = function(){
             if (checkLocal) {
                 return localRepository;
