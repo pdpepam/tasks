@@ -25,6 +25,7 @@ define(['Vendor',
 
         initialize: function () {
             this.listenTo(this.model, 'destroy', this.remove);
+            this.listenTo(this.model, 'destroy', this.removeLocal);
             this.saveLocal();
             this.render();
         },
@@ -39,24 +40,18 @@ define(['Vendor',
 
         modelCalculation: function(){
             var  json = null,
-                newModel;
+                 newModel;
 
             json = this.model.toJSON();
 
             newModel = new ItemModel({ 'city'     : json.city,
                                         'country'  : json.country}
-                //'hours'    : DateConvertor.getHours(json.offset),
-                //'minutes'  : DateConvertor.getMinutes(json.offset),
-                //'seconds'  : DateConvertor.getSeconds(json.offset)}
             );
-
 
         return newModel;
         },
 
-
-
-        destroy: function () {
+         destroy: function () {
             this.model.destroy();
         },
 
@@ -69,6 +64,11 @@ define(['Vendor',
             var json =this.model.toJSON();
             LocalStorage.addItem(json.city,json)
             //console.log(localStorage);
+        },
+
+        removeLocal: function(model){
+            var key = model.toJSON().city;
+            LocalStorage.removeItem(key)
         }
     });
 

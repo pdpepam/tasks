@@ -55,38 +55,14 @@ var _ = Vendor._,
             for(var item in localStorage){
                 var json = localStorage[item];
                 var some = json;
-                console.log(JSON.parse(some));
                 var BacbondeModel=Backbone.Model.extend({})
                 var model =new BacbondeModel({
                     'city':JSON.parse(some).city,
                     'country':JSON.parse(some).country,
                     'offset':JSON.parse(some).offset
                 });
-                console.log(model)
                 self.collection.add(model)
             }
-          /*  if(Modernizr.localstorage){
-                console.log(LocalStorage.getItems())
-
-                //this.collection.each(function(model){
-                //    var cityView = null,
-                //        clockView = null,
-                //        clockHolder = null,
-                //
-                //
-                //        cityView = new CityView({model: model});
-                //
-                //    setTimeout(function(){
-                //        var holder = $(cityView.$el).children('.clock') ;
-                //        clockView = new ClockView({el:holder, model:model});
-                //    },1);
-                //
-                //    self.$el.append(cityView.render());
-                //
-
-                //});
-
-            }*/
         }
 
     });
