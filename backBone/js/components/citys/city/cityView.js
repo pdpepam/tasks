@@ -1,6 +1,6 @@
 define(['Vendor',
         'observer',
-        'components/services/LocalStorage/LocalStorage',
+        '../../services/LocalStorage',
         'utils/dateConvertor',
         './cityModel',
         'text!./cityTemplate.html'
@@ -45,7 +45,7 @@ define(['Vendor',
             json = this.model.toJSON();
 
             newModel = new ItemModel({ 'city'     : json.city,
-                                        'country'  : json.country}
+                                       'country'  : json.country}
             );
 
         return newModel;

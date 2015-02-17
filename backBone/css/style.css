@@ -15,3 +15,8 @@
     font-family: Digital;
     font-size: 2em;
 }
+.call{
+    width: 2em;
+}
+.call .hours{}
+.call .minutes{}

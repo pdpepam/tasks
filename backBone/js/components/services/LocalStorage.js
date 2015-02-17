@@ -10,7 +10,10 @@ define(['Vendor'],function(Vendor) {
 
         var  localRepository = localStorage;
 
-        var checkLocal=Modernizr.localstorage;
+        /*
+        * Modernizr library is used for checking the localStorage accessibility
+        * */
+        var checkLocal = Modernizr.localstorage;
 
         this.addItem = function (name, value) {
             if (checkLocal) {
