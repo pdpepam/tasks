@@ -57,23 +57,24 @@ define(['Vendor',
             },{validate:true})
            /**
             * Save local minutes*/
-           this.saveLocalMinutes()
+           this.saveLocalMinutes(val)
         },
 
-        defineLocalKey: function(){
-            return this.$('.hours').parent().siblings('.city').html()
+        _AlarmKey: function(){
+            return 'Alarm_'+this.$('.hours').parent().siblings('.city').html()
         },
+
+
+         saveLocalHours:function(val){
+             var alarmkey = this._AlarmKey();
+             LocalStorage.addItem(alarmkey,val)
+         },
+
         saveLocalMinutes:function(){
-            var key = this.defineLocalKey()
-            console.log(key)
-        },
-
-         saveLocalHours:function(){
-             var key = this.defineLocalKey()
-             console.log(key)
-         }
-
+            var alarmkey = this._AlarmKey();
+            console.log(alarmkey)
         }
+    }
 
 );
 

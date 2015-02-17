@@ -67,18 +67,19 @@ var _ = Vendor._,
             var self=this;
             var localStorage=LocalStorage.getItems();
             for(var item in localStorage){
-                var json = localStorage[item];
-                var some = json;
-                var BacbondeModel=Backbone.Model.extend({})
-                var model =new BacbondeModel({
-                    'city':JSON.parse(some).city,
-                    'country':JSON.parse(some).country,
-                    'offset':JSON.parse(some).offset
-                });
-                self.collection.add(model)
+                if(item.indexOf('Alarm_')==-1){
+                    var json = localStorage[item];
+                    var some = json;
+                    var BacbondeModel=Backbone.Model.extend({})
+                    var model =new BacbondeModel({
+                        'city':JSON.parse(some).city,
+                        'country':JSON.parse(some).country,
+                        'offset':JSON.parse(some).offset
+                    });
+                    self.collection.add(model)
+                }
             }
         }
-
     });
 
 return cityView;
