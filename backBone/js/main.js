@@ -76,9 +76,9 @@ define('main',
         History = Backbone.history.start();
 
         Holders = {
-            'searchHolder'  : '.google-search',
+            'searchHolder': '.google-search',
             'dropListHolder': '.auto-cites',
-            'citysHolder'   : '.finded-cites tbody'
+            'citysHolder': '.finded-cites tbody'
         };
 
         searchView = new SearchView({el: Holders.searchHolder});
@@ -98,17 +98,7 @@ define('main',
         /**
          * On ready CityView
          * */
-        Observer.on('readyCity',readyCity);
-
-        /**
-         * Save city to LacalStorage*/
-        Observer.on('saveLocalSt',saveLocalStorage);
-
-        /**
-         * Remove alarm from localStorage
-         * */
-        Observer.on('removeLocalAlarm',removeLocalAlarm);
-
+        Observer.on('readyCity', readyCity);
 
         function getAutocomplete(data) {
 
@@ -132,38 +122,87 @@ define('main',
                 json;
 
             json = data.toJSON();
-            forecast =new Forecast(json.reference,json.city);
+            forecast = new Forecast(json.reference, json.city);
 
-            $.when(forecast.promise).done(function(){
-                         var self=this,
-                             itemView = null,
-                             BackboneModel=null,
-                             model=null;
+            $.when(forecast.promise).done(function () {
+                var self = this,
+                    itemView = null,
+                    BackboneModel = null,
+                    model = null;
 
-                 BackboneModel=Backbone.Model.extend({});
+                BackboneModel = Backbone.Model.extend({});
 
-                 model = new BackboneModel({city   :json.city,
-                                            country :json.country,
-                                            offset  :forecast.forecast.offset});
+                model = new BackboneModel({
+                    city: json.city,
+                    country: json.country,
+                    offset: forecast.forecast.offset
+                });
 
                 citesView.collection.add(model);
             });
 
         }
 
-        function readyCity(readyCity){
+        function readyCity(readyCity) {
 
-            var  Holders =null;
+            var Holders = null;
 
             Holders = {
                 clockHolder: $(readyCity.$el).children('.clock'),
                 alarmHolder: $(readyCity.$el).children('.alarm')
             };
 
-            new ClockView({el: Holders.clockHolder, model:readyCity.model});
+            new ClockView({el: Holders.clockHolder, model: readyCity.model});
 
             new AlarmView({el: Holders.alarmHolder})
 
+        }
+
+        /**
+         * Work with local Storate
+         * */
+
+
+        /*
+         * Get cites from local Storage
+         */
+        LocalRender();
+
+         /*
+         *Save city to LacalStorage
+         */
+        Observer.on('saveLocalSt',saveLocalStorage);
+
+        /*
+         * Remove alarm from localStorage
+         * */
+        Observer.on('removeLocalAlarm',removeLocalAlarm);
+
+
+        function LocalRender() {
+
+            var localStorage = LocalStorage.getItems();
+
+            for (var item in localStorage) {
+
+                var self = this;
+                if (item.indexOf('Alarm_') == -1) {
+
+                 var  itemVal,
+                      BacbondeModel,
+                      model;
+
+                    itemVal = localStorage[item];
+                    BacbondeModel = Backbone.Model.extend({});
+
+                    model = new BacbondeModel({
+                        'city': JSON.parse(itemVal).city,
+                        'country': JSON.parse(itemVal).country,
+                        'offset': JSON.parse(itemVal).offset
+                    });
+                 citesView.collection.add(model)
+                }
+            }
         }
 
 

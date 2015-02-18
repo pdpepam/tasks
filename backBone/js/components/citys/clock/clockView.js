@@ -36,6 +36,10 @@ define(['Vendor',
                 this.view = this.template(newModel.toJSON());
                 this.$el.html(this.view);
                 return this.$el;
+        },
+
+        localRender:function(){
+
         }
     });
 

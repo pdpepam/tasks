@@ -43,36 +43,8 @@ define(['Vendor',
                     cityView = new CityView({model: model});
                     self.$el.append(cityView.render());
                 });
-            },
-
-            localStorageRender: function () {
-                var self = this;
-                var localStorage = LocalStorage.getItems();
-
-                for (var item in localStorage) {
-
-                    if (item.indexOf('Alarm_') == -1) {
-
-                        var itemVal,
-                            BacbondeModel,
-                            model;
-
-                        itemVal = localStorage[item];
-                        BacbondeModel = Backbone.Model.extend({});
-
-                        model = new BacbondeModel({
-                            'city': JSON.parse(itemVal).city,
-                            'country': JSON.parse(itemVal).country,
-                            'offset': JSON.parse(itemVal).offset
-                        });
-                        debugger;
-                        self.collection.add(model)
-                    }
-
-                    if (item.indexOf('Alarm_')) {
-                    }
-                }
             }
+
         });
 
     return cityView;
