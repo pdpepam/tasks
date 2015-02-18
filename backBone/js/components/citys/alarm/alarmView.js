@@ -66,24 +66,25 @@ define(['Vendor',
 
 
          saveLocalHours:function(val){
-             var alarmkey = this._AlarmKey();
+             var alarmkey = this._AlarmKey().trim();
+             console.log(alarmkey)
+             var json= alarmkey;
              var obj={
                  'hours'   : val,
                  'minutes' : '00'
              };
-             LocalStorage.addItem(alarmkey,obj)
+             LocalStorage.addItem(json,obj)
          },
 
         saveLocalMinutes:function(val){
             var alarmkey = this._AlarmKey();
             var curVal = JSON.parse(localStorage.getItem(alarmkey));
-            console.log(curVal,'curval')
             if(curVal){
                 var newObj={
                     hours   :curVal.hours,
                     minutes :val
                 };
-                var stringify=JSON.stringify(newObj)
+                var stringify=JSON.stringify(newObj);
                 LocalStorage.setItem(alarmkey,stringify )
             }
         }

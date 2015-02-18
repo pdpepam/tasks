@@ -38,7 +38,7 @@ define(['Vendor'],function(Vendor) {
 
         this.setItem = function(key,val){
             localStorage.setItem(key,val)
-        }
+        };
 
         this.getItems = function(){
             if (checkLocal) {

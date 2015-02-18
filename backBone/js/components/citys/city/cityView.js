@@ -1,9 +1,9 @@
 define(['Vendor',
-        'observer',
-        '../../services/LocalStorage',
-        'utils/dateConvertor',
-        './cityModel',
-        'text!./cityTemplate.html'
+    'observer',
+    '../../services/LocalStorage',
+    'utils/dateConvertor',
+    './cityModel',
+    'text!./cityTemplate.html'
 ], function (Vendor,
              Observer,
              LocalStorage,
@@ -31,42 +31,44 @@ define(['Vendor',
         },
 
         render: function () {
-            this.newModel=this.modelCalculation();
+            this.newModel = this.modelCalculation();
             this.template = _.template(Template);
             this.view = this.template(this.newModel.toJSON());
             this.$el.html(this.view);
             return this.$el;
         },
 
-        modelCalculation: function(){
-            var  json = null,
-                 newModel;
+        modelCalculation: function () {
+            var json = null,
+                newModel;
 
             json = this.model.toJSON();
 
-            newModel = new ItemModel({ 'city'     : json.city,
-                                       'country'  : json.country}
+            newModel = new ItemModel({
+                    'city': json.city,
+                    'country': json.country
+                }
             );
 
-        return newModel;
+            return newModel;
         },
 
-         destroy: function () {
+        destroy: function () {
             this.model.destroy();
         },
 
-        remove: function(){
+        remove: function () {
             this.$el.remove();
+            Observer.trigger('removeLocalAlarm', this.model)
         },
 
 
-        saveLocal:function(){
-            var json =this.model.toJSON();
-            LocalStorage.addItem(json.city,json)
-            //console.log(localStorage);
+        saveLocal: function () {
+            var json = this.model.toJSON();
+            LocalStorage.addItem(json.city, json)
         },
 
-        removeLocal: function(model){
+        removeLocal: function (model) {
             var key = model.toJSON().city;
             LocalStorage.removeItem(key)
         }

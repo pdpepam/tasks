@@ -8,8 +8,8 @@ require.config({
         'Backbone' : 'libs/backbone',
         'text'     : 'libs/text',
         'observer' : 'observer',
-        'routes'   :'routes'
-
+        'routes'   : 'routes',
+        'constans' : 'constans'
     },
 
     shim: {
@@ -42,15 +42,19 @@ require.config({
 define('main',
     ['Vendor',
      'observer',
+     'constans',
+     'components/services/LocalStorage',
      'routes',
-    'components/services/Forecast',
-    'components/search/searchView',
-    'components/dropList/dropListView',
-    'components/citys/citysView'
+     'components/services/Forecast',
+     'components/search/searchView',
+     'components/dropList/dropListView',
+     'components/citys/citysView'
     ],
 
     function (Vendor,
               Observer,
+              Constans,
+              LocalStorage,
               Routes,
               Forecast,
               SearchView,
@@ -62,15 +66,15 @@ define('main',
         var Holders = null,
             searchView = null,
             dropListView = null,
-            citesView = null
+            citesView = null,
             History;
 
         History = Backbone.history.start();
 
         Holders = {
-            'searchHolder': '.google-search',
+            'searchHolder'  : '.google-search',
             'dropListHolder': '.auto-cites',
-            'citysHolder': '.finded-cites tbody'
+            'citysHolder'   : '.finded-cites tbody'
         };
 
         searchView = new SearchView({el: Holders.searchHolder});
@@ -91,6 +95,10 @@ define('main',
          * Save city to LacalStorage*/
         Observer.on('saveLocalSt',saveLocalStorage)
 
+        /**
+         * Remove alarm from localStorage
+         * */
+        Observer.on('removeLocalAlarm',removeLocalAlarm)
 
         function getAutocomplete(data) {
 
@@ -139,5 +147,20 @@ define('main',
                 LocalStorage
 
             }
+        }
+
+        function removeLocalAlarm (model){
+            var jsonModel = null,
+                firstAlarmKey,
+                secondAlarmKey,
+                mianAlarmkey;
+
+            jsonModel      = model.toJSON();
+            firstAlarmKey  = Constans.alarmKey;
+            secondAlarmKey = jsonModel.city;
+            mianAlarmkey   = firstAlarmKey + secondAlarmKey;
+
+            console.log(mianAlarmkey);
+            LocalStorage.removeItem(mianAlarmkey)
         }
 });
