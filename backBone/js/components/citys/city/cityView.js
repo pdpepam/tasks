@@ -35,6 +35,7 @@ define(['Vendor',
             this.template = _.template(Template);
             this.view = this.template(this.newModel.toJSON());
             this.$el.html(this.view);
+            Observer.trigger('readyCity',this)
             return this.$el;
         },
 

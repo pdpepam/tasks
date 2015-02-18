@@ -48,7 +48,9 @@ define('main',
      'components/services/Forecast',
      'components/search/searchView',
      'components/dropList/dropListView',
-     'components/citys/citysView'
+     'components/citys/citysView',
+     'components/citys/clock/clockView',
+     'components/citys/alarm/alarmView'
     ],
 
     function (Vendor,
@@ -59,7 +61,9 @@ define('main',
               Forecast,
               SearchView,
               DropListView,
-              CitesView) {
+              CitesView,
+              ClockView,
+              AlarmView  ) {
 
         'use strict';
 
@@ -92,13 +96,19 @@ define('main',
         Observer.on('selectGoogle', selectGoogleCity);
 
         /**
+         * On ready CityView
+         * */
+        Observer.on('readyCity',readyCity);
+
+        /**
          * Save city to LacalStorage*/
-        Observer.on('saveLocalSt',saveLocalStorage)
+        Observer.on('saveLocalSt',saveLocalStorage);
 
         /**
          * Remove alarm from localStorage
          * */
-        Observer.on('removeLocalAlarm',removeLocalAlarm)
+        Observer.on('removeLocalAlarm',removeLocalAlarm);
+
 
         function getAutocomplete(data) {
 
@@ -141,6 +151,22 @@ define('main',
 
         }
 
+        function readyCity(readyCity){
+
+            var  Holders =null;
+
+            Holders = {
+                clockHolder: $(readyCity.$el).children('.clock'),
+                alarmHolder: $(readyCity.$el).children('.alarm')
+            };
+
+            new ClockView({el: Holders.clockHolder, model:readyCity.model});
+
+            new AlarmView({el: Holders.alarmHolder})
+
+        }
+
+
         function saveLocalStorage(data){
 
             if(Modernizr.localstorage){
@@ -163,4 +189,6 @@ define('main',
             console.log(mianAlarmkey);
             LocalStorage.removeItem(mianAlarmkey)
         }
+
+
 });

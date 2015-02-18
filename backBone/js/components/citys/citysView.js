@@ -40,23 +40,7 @@ define(['Vendor',
                 this.$el.empty();
                 this.collection.each(function (model) {
                     var cityView = null,
-                        clockView = null,
-                        alaramView = null,
-                        clockHolder = null;
-
-
                     cityView = new CityView({model: model});
-
-                    setTimeout(function () {
-                        var Holders = {
-                            clockHolder: $(cityView.$el).children('.clock'),
-                            alarmHolder: $(cityView.$el).children('.alarm')
-                        }
-                        var holder = $(cityView.$el).children('.clock');
-                        clockView = new ClockView({el: Holders.clockHolder, model: model});
-                        alaramView = new AlarmView({el: Holders.alarmHolder})
-                    }, 1);
-
                     self.$el.append(cityView.render());
                 });
             },
@@ -64,6 +48,7 @@ define(['Vendor',
             localStorageRender: function () {
                 var self = this;
                 var localStorage = LocalStorage.getItems();
+
                 for (var item in localStorage) {
 
                     if (item.indexOf('Alarm_') == -1) {
@@ -80,12 +65,11 @@ define(['Vendor',
                             'country': JSON.parse(itemVal).country,
                             'offset': JSON.parse(itemVal).offset
                         });
-                        
+                        debugger;
                         self.collection.add(model)
                     }
 
                     if (item.indexOf('Alarm_')) {
-                        console.log('print alarm')
                     }
                 }
             }
