@@ -171,6 +171,8 @@ define('main',
          /*
          *Save city to LacalStorage
          */
+
+
         Observer.on('saveLocalSt',saveLocalStorage);
 
         /*
@@ -196,9 +198,9 @@ define('main',
                     BacbondeModel = Backbone.Model.extend({});
 
                     model = new BacbondeModel({
-                        'city': JSON.parse(itemVal).city,
+                        'city'   : JSON.parse(itemVal).city,
                         'country': JSON.parse(itemVal).country,
-                        'offset': JSON.parse(itemVal).offset
+                        'offset' : JSON.parse(itemVal).offset
                     });
                  citesView.collection.add(model)
                 }
@@ -227,7 +229,18 @@ define('main',
 
             console.log(mianAlarmkey);
             LocalStorage.removeItem(mianAlarmkey)
+        };
+
+
+        /////////////////
+        Observer.on('readyClock',readyClock);
+        function readyClock(clock){
+
         }
 
+        Observer.on('readyAlarm',readyAlarm);
 
-});
+        function readyAlarm(alarm){
+            console.log(alarm)
+        }
+    });

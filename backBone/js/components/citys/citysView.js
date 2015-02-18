@@ -41,6 +41,7 @@ define(['Vendor',
                 this.collection.each(function (model) {
                     var cityView = null,
                     cityView = new CityView({model: model});
+
                     self.$el.append(cityView.render());
                 });
             }

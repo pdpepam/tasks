@@ -21,12 +21,14 @@ define(['Vendor',
             var self = this;
             setInterval(function(){self.render()},1000);
             this.render();
+            Observer.trigger('readyClock',this.model.toJSON())
         },
 
         render: function () {
             var  json = null,
                 newModel;
-            json = this.model.toJSON();
+
+                 json = this.model.toJSON();
 
                 newModel = new ItemModel({'hours'    : DateConvertor.getHours(json.offset),
                                           'minutes'  : DateConvertor.getMinutes(json.offset),
@@ -35,6 +37,7 @@ define(['Vendor',
                 this.template = _.template(Template);
                 this.view = this.template(newModel.toJSON());
                 this.$el.html(this.view);
+
                 return this.$el;
         },
 

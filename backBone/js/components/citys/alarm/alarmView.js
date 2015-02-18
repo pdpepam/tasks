@@ -20,8 +20,8 @@ define(['Vendor',
     clockView = Backbone.View.extend({
 
         events:{
-            'blur .hours '  : 'saveHours',
-            'blur .minutes' : 'saveMinutes'
+            'blur .hours '  : 'saveChanges',
+            'blur .minutes' : 'saveChanges'
         },
 
         model:new ItemModel({}),
@@ -29,6 +29,7 @@ define(['Vendor',
 
         initialize: function () {
             var self = this;
+            this.listenTo(this.model,'change',this.render)
             this.render();
         },
 
@@ -36,29 +37,28 @@ define(['Vendor',
             this.template = _.template(Template);
             this.view = this.template(this.model.toJSON());
             this.$el.html(this.view);
+            Observer.trigger('readyAlarm',this.model.toJSON());
             return this.$el;
         },
 
-        saveHours:function(){
-            var val = this.$('.hours').val();
+        saveChanges:function(){
+            var hours   = this.$('.hours').val();
+            var minutes = this.$('.minutes').val();
             this.model.set({
-                'hours':val
+                'hours'  : hours,
+                'minutes': minutes
             },{validate:true})
-
-            /**
-            * Save to LocaslStorage*/
-            this.saveLocalHours(val)
         },
 
-        saveMinutes:function(){
-            var val = this.$('.minutes').val();
-            this.model.set({
-                'hours':val
-            },{validate:true})
-           /**
-            * Save local minutes*/
-            this.saveLocalMinutes(val)
-        },
+        //saveMinutes:function(){
+        //    var val = this.$('.minutes').val();
+        //    this.model.set({
+        //        'minutes':val
+        //    },{validate:true})
+        //   /**
+        //    * Save local minutes*/
+        //    this.saveLocalMinutes(val)
+        //},
 
         _AlarmKey: function(){
             return 'Alarm_'+this.$('.hours').parent().siblings('.city').html()
@@ -67,7 +67,6 @@ define(['Vendor',
 
          saveLocalHours:function(val){
              var alarmkey = this._AlarmKey().trim();
-             console.log(alarmkey)
              var json= alarmkey;
              var obj={
                  'hours'   : val,
