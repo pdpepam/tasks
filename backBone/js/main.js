@@ -3,6 +3,7 @@ require.config({
     baseUrl: 'js',
 
     paths: {
+        'CitysMain': 'components/citys/mainCity' ,
         'jquery'   : 'libs/jquery-2.1.3',
         'lodash'   : 'libs/lodash',
         'Backbone' : 'libs/backbone',
@@ -40,7 +41,8 @@ require.config({
 
 
 define('main',
-    ['Vendor',
+    [ 'CitysMain',
+     'Vendor',
      'observer',
      'constans',
      'components/services/LocalStorage',
@@ -53,7 +55,8 @@ define('main',
      'components/citys/alarm/alarmView'
     ],
 
-    function (Vendor,
+    function (CitesMain,
+              Vendor,
               Observer,
               Constans,
               LocalStorage,
@@ -66,6 +69,8 @@ define('main',
               AlarmView  ) {
 
         'use strict';
+
+
 
         var Holders = null,
             searchView = null,
@@ -85,7 +90,6 @@ define('main',
         dropListView = new DropListView({el: Holders.dropListHolder});
         citesView = new CitesView({el: Holders.citysHolder});
 
-
         /**
          * Search city using Google Autocomplete
          * */
@@ -98,7 +102,6 @@ define('main',
         /**
          * On ready CityView
          * */
-        Observer.on('readyCity', readyCity);
 
         function getAutocomplete(data) {
 
@@ -140,152 +143,6 @@ define('main',
 
                 citesView.collection.add(model);
             });
-
         }
 
-        function readyCity(readyCity) {
-
-            var Holders = null;
-
-            Holders = {
-                clockHolder: $(readyCity.$el).children('.clock'),
-                alarmHolder: $(readyCity.$el).children('.alarm')
-            };
-
-            new ClockView({el: Holders.clockHolder, model: readyCity.model});
-
-            new AlarmView({el: Holders.alarmHolder})
-
-            /*Save city in local Storage*/
-            localSaveCity(readyCity);
-            localSaveClock(readyCity);
-            localSaveAlarm(readyCity);
-        }
-
-        function localSaveCity(city){
-            var json = null,
-                key  = null,
-                filteredObj ;
-
-            json = city.model.toJSON();
-            key =Constans.cityKey + city.cid;
-            filteredObj={
-                city    : json.city,
-                country : json.country
-            };
-            LocalStorage.addItem(key, filteredObj)
-        };
-
-        function localSaveClock(city){
-            var json = null,
-                key = null,
-                filteredObj;
-
-            json = city.model.toJSON();
-            key = Constans.clockKey + city.cid;
-
-            filteredObj={
-                offset  : json.offset
-            };
-            LocalStorage.addItem(key, filteredObj)
-        };
-
-        function localSaveAlarm(city){
-            var key  = null,
-                alarmValue ;
-
-            key =Constans.alarmKey + city.cid;
-
-            alarmValue ={
-                hours   : '',
-                minutes : ''
-            };
-            LocalStorage.addItem(key, alarmValue)
-        };
-
-        /**
-         * Work with local Storate
-         * */
-
-
-        /*
-         * Get cites from local Storage
-         */
-        //LocalRender();
-        //
-        // /*
-        // *Save city to LacalStorage
-        // */
-        //
-        //
-        //Observer.on('saveLocalSt',saveLocalStorage);
-        //
-        ///*
-        // * Remove alarm from localStorage
-        // * */
-        //Observer.on('removeLocalAlarm',removeLocalAlarm);
-
-
-        //function LocalRender() {
-        //
-        //    var localStorage = LocalStorage.getItems();
-        //
-        //    for (var item in localStorage) {
-        //
-        //        var self = this;
-        //        if (item.indexOf('Alarm_') == -1) {
-        //
-        //         var  itemVal,
-        //              BacbondeModel,
-        //              model;
-        //
-        //            itemVal = localStorage[item];
-        //            BacbondeModel = Backbone.Model.extend({});
-        //
-        //            model = new BacbondeModel({
-        //                'city'   : JSON.parse(itemVal).city,
-        //                'country': JSON.parse(itemVal).country,
-        //                'offset' : JSON.parse(itemVal).offset
-        //            });
-        //         citesView.collection.add(model)
-        //        }
-        //    }
-        //}
-        //
-        //
-        //function saveLocalStorage(data){
-        //
-        //    if(Modernizr.localstorage){
-        //        LocalStorage
-        //
-        //    }
-        //}
-        //
-        //function removeLocalAlarm (model){
-        //    var jsonModel = null,
-        //        firstAlarmKey,
-        //        secondAlarmKey,
-        //        mianAlarmkey;
-        //
-        //    jsonModel      = model.toJSON();
-        //    firstAlarmKey  = Constans.alarmKey;
-        //    secondAlarmKey = jsonModel.city;
-        //    mianAlarmkey   = firstAlarmKey + secondAlarmKey;
-        //
-        //    console.log(mianAlarmkey);
-        //    LocalStorage.removeItem(mianAlarmkey)
-        //};
-        //
-        //
-        ///////////////////
-        //Observer.on('readyClock',readyClock);
-        //function readyClock(clock){
-        //
-        //}
-        //
-        //Observer.on('readyAlarm',readyAlarm);
-        //
-        //function readyAlarm(alarm){
-        //    console.log(alarm)
-        //}
     });

@@ -60,19 +60,19 @@ define(['Vendor',
 
         remove: function () {
             this.$el.remove();
-            Observer.trigger('removeLocalAlarm', this.model)
-        },
+            Observer.trigger('removeCity', this)
+        }
 
 
         //saveLocal: function () {
         //    var json = this.model.toJSON();
         //    LocalStorage.addItem(json.city, json)
         //},
-
-        removeLocal: function (model) {
-            var key = model.toJSON().city;
-            LocalStorage.removeItem(key)
-        }
+        //
+        //removeLocal: function (model) {
+        //    var key = model.toJSON().city;
+        //    LocalStorage.removeItem(key)
+        //}
     });
 
     return cityView;
