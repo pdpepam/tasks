@@ -110,7 +110,9 @@ define('main',
          * */
         function getLocalData() {
 
-            var localStorage = LocalStorage.getItems()
+            var localStorage = LocalStorage.getItems();
+
+            var dateForCollection =[]
 
             if (localStorage.length != 0) {
                 var keys = [],
@@ -140,23 +142,28 @@ define('main',
                     summaryInfo.push(model)
                 });
 
-                console.log(summaryInfo)
-                var dateForCollection =[]
+
+
 
                 _.forEach(summaryInfo, function(first){
                     /*1*/
                     console.log('separate')
                     var model ={}
+
                     _.forEach(first,function(second){
 
                         _.extend(model,second)
-                    })
+                    });
                   dateForCollection.push(model)
                 })
 
-                console.log(dateForCollection)
-
             }
+            //Adding to the ViewCollection
+            _.each(dateForCollection, function (item){
+                citesView.collection.add(item)
+            })
+
+
         }
 
         function getAutocomplete(data) {

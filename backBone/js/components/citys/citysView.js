@@ -31,7 +31,6 @@ define(['Vendor',
                 var self = this;
                 this.collection = new Collection();
                 this.listenTo(this.collection, 'add', this.render);
-
                 this.render();
             },
 
