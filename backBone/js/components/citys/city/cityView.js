@@ -25,8 +25,6 @@ define(['Vendor',
 
         initialize: function () {
             this.listenTo(this.model, 'destroy', this.remove);
-            this.listenTo(this.model, 'destroy', this.removeLocal);
-            //this.saveLocal();
             this.render();
         },
 

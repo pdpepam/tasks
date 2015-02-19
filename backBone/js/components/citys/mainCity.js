@@ -55,13 +55,27 @@ define(['Vendor',
             localSaveAlarm(readyCity);
         }
 
+            function _secondKey(city){
+                var json = null,
+                    key = null;
+
+                    json = city.model.toJSON();
+
+                    key = json.city +json.country;
+                    return key
+            }
+
             function localSaveCity(city) {
                 var json = null,
                     key = null,
                     filteredObj;
 
                 json = city.model.toJSON();
-                key = Constans.cityKey + city.cid;
+
+                var firsKey= Constans.cityKey
+                var secondKey = _secondKey(city)
+                key = firsKey +secondKey;
+
                 filteredObj = {
                     city: json.city,
                     country: json.country
@@ -70,12 +84,16 @@ define(['Vendor',
             };
 
             function localSaveClock(city) {
+                console.log(city)
                 var json = null,
                     key = null,
                     filteredObj;
 
                 json = city.model.toJSON();
-                key = Constans.clockKey + city.cid;
+                var firstKey=Constans.clockKey;
+                var secondKey =_secondKey(city);
+
+                key = firstKey+secondKey;
 
                 filteredObj = {
                     offset: json.offset
@@ -87,7 +105,10 @@ define(['Vendor',
             var key = null,
                 alarmValue;
 
-            key = Constans.alarmKey + city.cid;
+            var firstKey=Constans.alarmKey;
+            var secondKey =_secondKey(city);
+
+                key = firstKey + secondKey;
 
             alarmValue = {
                 hours: '',
@@ -100,9 +121,8 @@ define(['Vendor',
         ///////////
         function removeCity(removeCity){
            //Define key in which will be deleted elements from localStorage
-            var deletedKey = removeCity.cid;
-            console.log(deletedKey)
-            console.log(removeCity.cid)
+            var deletedKey = _secondKey(removeCity);
+
            var localStorage = LocalStorage.getItems();
            for(var key in localStorage){
                console.log(key)
