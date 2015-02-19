@@ -26,7 +26,7 @@ define(['Vendor',
         initialize: function () {
             this.listenTo(this.model, 'destroy', this.remove);
             this.listenTo(this.model, 'destroy', this.removeLocal);
-            this.saveLocal();
+            //this.saveLocal();
             this.render();
         },
 
@@ -64,10 +64,10 @@ define(['Vendor',
         },
 
 
-        saveLocal: function () {
-            var json = this.model.toJSON();
-            LocalStorage.addItem(json.city, json)
-        },
+        //saveLocal: function () {
+        //    var json = this.model.toJSON();
+        //    LocalStorage.addItem(json.city, json)
+        //},
 
         removeLocal: function (model) {
             var key = model.toJSON().city;

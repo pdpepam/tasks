@@ -30,7 +30,7 @@ define(['Vendor',
 
                  json = this.model.toJSON();
 
-                newModel = new ItemModel({'hours'    : DateConvertor.getHours(json.offset),
+                 newModel = new ItemModel({'hours'    : DateConvertor.getHours(json.offset),
                                           'minutes'  : DateConvertor.getMinutes(json.offset),
                                           'seconds'  : DateConvertor.getSeconds(json.offset)});
 
@@ -39,10 +39,6 @@ define(['Vendor',
                 this.$el.html(this.view);
 
                 return this.$el;
-        },
-
-        localRender:function(){
-
         }
     });
 

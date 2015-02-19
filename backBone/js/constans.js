@@ -1,10 +1,12 @@
 define('constans',function(){
 
     /*
-    * @alaramKey  first part of compound key for saving alarm in localStorage*/
+    * @alaramKey  first part of compound key for saving  in localStorage*/
     var constans = {
-        alarmKey :'Alarm_'
-    }
+        cityKey  : 'CITY_',
+        clockKey : 'CLOCK_',
+        alarmKey : 'ALARM_'
+    };
 
     return constans;
 });
