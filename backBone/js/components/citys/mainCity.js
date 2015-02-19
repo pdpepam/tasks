@@ -1,33 +1,21 @@
-define([ 'CitysMain',
-        'Vendor',
+define(['Vendor',
         'observer',
         'constans',
         'components/services/LocalStorage',
-        'routes',
-        'components/services/Forecast',
-        'components/search/searchView',
-        'components/dropList/dropListView',
         'components/citys/citysView',
         'components/citys/clock/clockView',
         'components/citys/alarm/alarmView'
     ],
 
-    function (CitesMain,
-              Vendor,
+    function (Vendor,
               Observer,
               Constans,
               LocalStorage,
-              Routes,
-              Forecast,
-              SearchView,
-              DropListView,
               CitesView,
               ClockView,
               AlarmView  ) {
 
         'use strict';
-
-        console.log('it work')
         var Holders = null,
             searchView = null,
             dropListView = null,
@@ -40,16 +28,13 @@ define([ 'CitysMain',
         };
 
 
-        /**
-         * Adding information to Views, thats cituated in folder CITY
-         * */
-        Observer.on('readyCity', readyCity);
-
-       
+         Observer.on('readyCity', readyCity);
         /*
         * On remove city
         * */
         Observer.on('removeCity',removeCity)
+
+
 
         function readyCity(readyCity) {
 
@@ -116,9 +101,12 @@ define([ 'CitysMain',
         function removeCity(removeCity){
            //Define key in which will be deleted elements from localStorage
             var deletedKey = removeCity.cid;
+            console.log(deletedKey)
+            console.log(removeCity.cid)
            var localStorage = LocalStorage.getItems();
            for(var key in localStorage){
-               if(key.indexOf(removeCity)){
+               console.log(key)
+               if(key.indexOf(deletedKey)!=-1){
                    LocalStorage.removeItem(key)
                }
            }

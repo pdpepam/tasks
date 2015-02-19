@@ -3,14 +3,14 @@ require.config({
     baseUrl: 'js',
 
     paths: {
-        'CitysMain': 'components/citys/mainCity' ,
-        'jquery'   : 'libs/jquery-2.1.3',
-        'lodash'   : 'libs/lodash',
-        'Backbone' : 'libs/backbone',
-        'text'     : 'libs/text',
-        'observer' : 'observer',
-        'routes'   : 'routes',
-        'constans' : 'constans'
+        'CitysMain': 'components/citys/mainCity',
+        'jquery': 'libs/jquery-2.1.3',
+        'lodash': 'libs/lodash',
+        'Backbone': 'libs/backbone',
+        'text': 'libs/text',
+        'observer': 'observer',
+        'routes': 'routes',
+        'constans': 'constans'
     },
 
     shim: {
@@ -41,18 +41,18 @@ require.config({
 
 
 define('main',
-    [ 'CitysMain',
-     'Vendor',
-     'observer',
-     'constans',
-     'components/services/LocalStorage',
-     'routes',
-     'components/services/Forecast',
-     'components/search/searchView',
-     'components/dropList/dropListView',
-     'components/citys/citysView',
-     'components/citys/clock/clockView',
-     'components/citys/alarm/alarmView'
+    ['CitysMain',
+        'Vendor',
+        'observer',
+        'constans',
+        'components/services/LocalStorage',
+        'routes',
+        'components/services/Forecast',
+        'components/search/searchView',
+        'components/dropList/dropListView',
+        'components/citys/citysView',
+        'components/citys/clock/clockView',
+        'components/citys/alarm/alarmView'
     ],
 
     function (CitesMain,
@@ -66,11 +66,11 @@ define('main',
               DropListView,
               CitesView,
               ClockView,
-              AlarmView  ) {
+              AlarmView) {
 
         'use strict';
 
-
+        var _ = Vendor._;
 
         var Holders = null,
             searchView = null,
@@ -81,14 +81,20 @@ define('main',
         History = Backbone.history.start();
 
         Holders = {
-            'searchHolder'  : '.google-search',
+            'searchHolder': '.google-search',
             'dropListHolder': '.auto-cites',
-            'citysHolder'   : '.finded-cites tbody'
+            'citysHolder': '.finded-cites tbody'
         };
 
         searchView = new SearchView({el: Holders.searchHolder});
         dropListView = new DropListView({el: Holders.dropListHolder});
         citesView = new CitesView({el: Holders.citysHolder});
+
+        /*
+         * Get data from local Storage
+         * */
+        getLocalData()
+
 
         /**
          * Search city using Google Autocomplete
@@ -102,6 +108,56 @@ define('main',
         /**
          * On ready CityView
          * */
+        function getLocalData() {
+
+            var localStorage = LocalStorage.getItems()
+
+            if (localStorage.length != 0) {
+                var keys = [],
+                    s_Keys = [],
+                    summaryInfo;
+
+                for (var locaKey in localStorage) {
+                    var key = locaKey.split('_')[1]
+                    keys.push(key)
+                }
+                //delete dublicate from keys
+                s_Keys = _.uniq(keys);
+
+                //Array from order data
+
+                summaryInfo = [];
+
+                //Create Array of Arrays union on general key
+                s_Keys.forEach(function (key) {
+                    var model = [];
+                    for (var locaKey in localStorage) {
+                        if (locaKey.indexOf(key) != -1) {
+                            var obj= JSON.parse(localStorage[locaKey]);
+                            model.push(obj)
+                        }
+                    }
+                    summaryInfo.push(model)
+                });
+
+                console.log(summaryInfo)
+                var dateForCollection =[]
+
+                _.forEach(summaryInfo, function(first){
+                    /*1*/
+                    console.log('separate')
+                    var model ={}
+                    _.forEach(first,function(second){
+
+                        _.extend(model,second)
+                    })
+                  dateForCollection.push(model)
+                })
+
+                console.log(dateForCollection)
+
+            }
+        }
 
         function getAutocomplete(data) {
 
@@ -144,5 +200,6 @@ define('main',
                 citesView.collection.add(model);
             });
         }
+
 
     });

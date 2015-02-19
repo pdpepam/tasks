@@ -64,15 +64,6 @@ define(['Vendor',
         }
 
 
-        //saveLocal: function () {
-        //    var json = this.model.toJSON();
-        //    LocalStorage.addItem(json.city, json)
-        //},
-        //
-        //removeLocal: function (model) {
-        //    var key = model.toJSON().city;
-        //    LocalStorage.removeItem(key)
-        //}
     });
 
     return cityView;

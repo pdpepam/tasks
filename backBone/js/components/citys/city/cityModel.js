@@ -11,10 +11,10 @@ define(['Vendor'],function(Vendor){
         url:'#some',
 
         defaults:{
-            city:'Kharkov',
-            country:'Ukraine',
-            hours:'10',
-            minutes:'20'
+            city    :'undefine',
+            country :'undefine',
+            hours   :'undefine',
+            minutes :'undefine'
         }
     });
 

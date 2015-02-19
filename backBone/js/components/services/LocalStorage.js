@@ -15,6 +15,9 @@ define(['Vendor'],function(Vendor) {
         * */
         var checkLocal = Modernizr.localstorage;
 
+        this.length = function (){
+            return localStorage.length
+        }
         this.addItem = function (name, value) {
             if (checkLocal) {
                 localStorage.setItem(name, JSON.stringify(value));
