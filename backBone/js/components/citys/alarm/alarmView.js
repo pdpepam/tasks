@@ -24,7 +24,7 @@ define(['Vendor',
             'blur .minutes' : 'saveChanges'
         },
 
-        model:new ItemModel({}),
+        model: new ItemModel({}),
 
 
         initialize: function () {
@@ -37,7 +37,6 @@ define(['Vendor',
             this.template = _.template(Template);
             this.view = this.template(this.model.toJSON());
             this.$el.html(this.view);
-
             return this.$el;
         },
 
@@ -47,7 +46,7 @@ define(['Vendor',
             this.model.set({
                 'hours'  : hours,
                 'minutes': minutes
-            },{validate:true})
+            },{validate:true});
             Observer.trigger('readyAlarm',this).$el;
 
         }

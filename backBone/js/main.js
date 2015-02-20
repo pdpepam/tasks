@@ -86,15 +86,14 @@ define('main',
             'citysHolder': '.finded-cites tbody'
         };
 
-        searchView = new SearchView({el: Holders.searchHolder});
+        searchView   = new SearchView({el: Holders.searchHolder});
         dropListView = new DropListView({el: Holders.dropListHolder});
-        citesView = new CitesView({el: Holders.citysHolder});
+        citesView    = new CitesView({el: Holders.citysHolder});
 
         /*
          * Get data from local Storage
          * */
         getLocalData()
-
 
         /**
          * Search city using Google Autocomplete
@@ -160,6 +159,7 @@ define('main',
             }
             //Adding to the ViewCollection
             _.each(dateForCollection, function (item){
+
                 citesView.collection.add(item)
             })
 
