@@ -199,9 +199,11 @@ define('main',
                 BackboneModel = Backbone.Model.extend({});
 
                 model = new BackboneModel({
-                    city: json.city,
-                    country: json.country,
-                    offset: forecast.forecast.offset
+                    city     : json.city,
+                    country  : json.country,
+                    offset   : forecast.forecast.offset,
+                    hours    : '?',
+                    minutes  : '?'
                 });
 
                 citesView.collection.add(model);

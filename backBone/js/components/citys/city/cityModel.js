@@ -13,8 +13,8 @@ define(['Vendor'],function(Vendor){
         defaults:{
             city    :'undefine',
             country :'undefine',
-            hours   :'undefine',
-            minutes :'undefine'
+            hours   :'0',
+            minutes :'0'
         }
     });
 

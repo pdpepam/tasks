@@ -44,8 +44,10 @@ define(['Vendor',
             json = this.model.toJSON();
 
             newModel = new ItemModel({
-                    'city': json.city,
-                    'country': json.country
+                    'city'    : json.city,
+                    'country' : json.country,
+                    'hours'   : 0,
+                    'minutes' : 0
                 }
             );
 

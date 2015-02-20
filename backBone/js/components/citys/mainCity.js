@@ -53,12 +53,12 @@ define(['Vendor',
 
             new ClockView({el: Holders.clockHolder, model: readyCity.model});
 
-            new AlarmView({el: Holders.alarmHolder, model: readyCity.model})
+            new AlarmView({el: Holders.alarmHolder ,  model: readyCity.model})
 
             /*Save city in local Storage*/
             localSaveCity(readyCity);
             localSaveClock(readyCity);
-            //localSaveAlarm(readyCity);
+            localSaveAlarm(readyCity);
         }
 
             function _secondKey(city){
@@ -106,18 +106,18 @@ define(['Vendor',
                 LocalStorage.addItem(key, filteredObj)
             };
 
-            function localPrintAlarm(city) {
+            function  localSaveAlarm(city) {
             var key = null,
                 alarmValue;
 
             var firstKey=Constans.alarmKey;
-            var secondKey =_secondKey(city);
+            var secondKey = _secondKey(city);
 
                 key = firstKey + secondKey;
 
             alarmValue = {
-                hours: '',
-                minutes: ''
+                hours: 0,
+                minutes: 0
             };
             LocalStorage.addItem(key, alarmValue)
         };
