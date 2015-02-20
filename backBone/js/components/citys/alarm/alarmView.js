@@ -37,7 +37,6 @@ define(['Vendor',
             this.template = _.template(Template);
             this.view = this.template(this.model.toJSON());
             this.$el.html(this.view);
-            Observer.trigger('readyAlarm',this.model.toJSON());
             return this.$el;
         },
 
@@ -48,6 +47,7 @@ define(['Vendor',
                 'hours'  : hours,
                 'minutes': minutes
             },{validate:true})
+            Observer.trigger('readyAlarm',this).$el;
         },
 
         //saveMinutes:function(){

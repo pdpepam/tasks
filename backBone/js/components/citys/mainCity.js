@@ -22,16 +22,22 @@ define(['Vendor',
             citesView = null,
 
         Holders = {
-            'searchHolder': '.google-search',
+            'searchHolder'  : '.google-search',
             'dropListHolder': '.auto-cites',
-            'citysHolder': '.finded-cites tbody'
+            'citysHolder'   : '.finded-cites tbody'
         };
 
 
          Observer.on('readyCity', readyCity);
+
+
         /*
-        * On remove city
-        * */
+        * Sacing changes of alarm*/
+         Observer.on('readyAlarm', readyAlarm);
+
+        /*
+         * On remove city
+         * */
         Observer.on('removeCity',removeCity)
 
 
@@ -52,7 +58,7 @@ define(['Vendor',
             /*Save city in local Storage*/
             localSaveCity(readyCity);
             localSaveClock(readyCity);
-            localSaveAlarm(readyCity);
+            //localSaveAlarm(readyCity);
         }
 
             function _secondKey(city){
@@ -84,7 +90,6 @@ define(['Vendor',
             };
 
             function localSaveClock(city) {
-                console.log(city)
                 var json = null,
                     key = null,
                     filteredObj;
@@ -131,4 +136,16 @@ define(['Vendor',
                }
            }
         }
+        ////////////////////////////////////////////
+
+        function readyAlarm(alarm){
+            var json = alarm.model.toJSON();
+            var city    = alarm.$el.closest('tr').children('.city').html().trim();
+            var country = alarm.$el.closest('tr').children('.country').html().trim();
+            var secondkey = city+country+'';
+            var firstKey = Constans.alarmKey;
+            var key = firstKey+secondkey;
+            LocalStorage.addItem(key, json)
+        }
+
  });
