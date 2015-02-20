@@ -136,16 +136,26 @@ define(['Vendor',
                }
            }
         }
-        ////////////////////////////////////////////
+
 
         function readyAlarm(alarm){
             var json = alarm.model.toJSON();
-            var city    = alarm.$el.closest('tr').children('.city').html().trim();
-            var country = alarm.$el.closest('tr').children('.country').html().trim();
-            var secondkey = city+country+'';
+            var c = alarm.$el;
+            var co =alarm.$el
+            var city    = $(c).closest('tr').children('.city').html()+'';
+            var country = $(co).closest('tr').children('.country').html()+'';
+
+            var notspageCity = city.trim();
+            var notspageCountry = city.trim();
+            var secondkey = notspageCity + notspageCountry;
             var firstKey = Constans.alarmKey;
             var key = firstKey+secondkey;
-            LocalStorage.addItem(key, json)
+            var obj={
+                'hours'   : json.hours,
+                'minutes' : json.minutes
+            }
+
+            LocalStorage.setItem(key, JSON.stringify(json))
         }
 
  });

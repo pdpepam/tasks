@@ -37,6 +37,7 @@ define(['Vendor',
             this.template = _.template(Template);
             this.view = this.template(this.model.toJSON());
             this.$el.html(this.view);
+
             return this.$el;
         },
 
@@ -48,45 +49,9 @@ define(['Vendor',
                 'minutes': minutes
             },{validate:true})
             Observer.trigger('readyAlarm',this).$el;
-        },
 
-        //saveMinutes:function(){
-        //    var val = this.$('.minutes').val();
-        //    this.model.set({
-        //        'minutes':val
-        //    },{validate:true})
-        //   /**
-        //    * Save local minutes*/
-        //    this.saveLocalMinutes(val)
-        //},
-
-        _AlarmKey: function(){
-            return 'Alarm_'+this.$('.hours').parent().siblings('.city').html()
-        },
-
-
-         saveLocalHours:function(val){
-             var alarmkey = this._AlarmKey().trim();
-             var json= alarmkey;
-             var obj={
-                 'hours'   : val,
-                 'minutes' : '00'
-             };
-             LocalStorage.addItem(json,obj)
-         },
-
-        saveLocalMinutes:function(val){
-            var alarmkey = this._AlarmKey();
-            var curVal = JSON.parse(localStorage.getItem(alarmkey));
-            if(curVal){
-                var newObj={
-                    hours   :curVal.hours,
-                    minutes :val
-                };
-                var stringify=JSON.stringify(newObj);
-                LocalStorage.setItem(alarmkey,stringify )
-            }
         }
+
     }
 
 );
