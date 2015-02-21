@@ -130,7 +130,6 @@ define(['Vendor',
 
            var localStorage = LocalStorage.getItems();
            for(var key in localStorage){
-               console.log(key)
                if(key.indexOf(deletedKey)!=-1){
                    LocalStorage.removeItem(key)
                }
@@ -142,8 +141,8 @@ define(['Vendor',
             var json = alarm.model.toJSON();
             var c = alarm.$el;
             var co =alarm.$el
-            var city    = $(c).closest('tr').children('.city').html()+'';
-            var country = $(co).closest('tr').children('.country').html()+'';
+            var city    = $(c).closest('tr').children('.city').html();
+            var country = $(co).closest('tr').children('.country').html();
 
             var notspageCity = city.trim();
             var notspageCountry = city.trim();
@@ -154,8 +153,28 @@ define(['Vendor',
                 'hours'   : json.hours,
                 'minutes' : json.minutes
             }
-
             LocalStorage.setItem(key, JSON.stringify(json))
+        }
+
+
+
+
+        Observer.on('tiktak',tiktak);
+
+        function tiktak(time){
+            ////define alarm for this clock
+            var alarm = $(time).closest('tr').children('.alarm');
+            //
+            var hours  = $(alarm).children('.hours').val()
+            var minutes = $(alarm).children('.minutes').val()
+
+            var alarmTime = hours + minutes;
+            var clockTime = time.html()
+            //deleteseconds
+            var removeSec = clockTime.split(':');
+            var result = removeSec[0]+removeSec[1]
+
+
         }
 
  });

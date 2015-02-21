@@ -21,7 +21,6 @@ define(['Vendor',
             var self = this;
             setInterval(function(){self.render()},1000);
             this.render();
-            Observer.trigger('readyClock',this.model.toJSON())
         },
 
         render: function () {
@@ -37,7 +36,7 @@ define(['Vendor',
                 this.template = _.template(Template);
                 this.view = this.template(newModel.toJSON());
                 this.$el.html(this.view);
-
+                Observer.trigger('tiktak',this.$el);
                 return this.$el;
         }
     });

@@ -45,9 +45,7 @@ define(['Vendor',
 
             newModel = new ItemModel({
                     'city'    : json.city,
-                    'country' : json.country,
-                    'hours'   : 0,
-                    'minutes' : 0
+                    'country' : json.country
                 }
             );
 
